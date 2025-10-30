@@ -136,3 +136,24 @@ html, body {
 #uid-text {
     font-family: "Courier New", Courier, monospace;
 }
+
+/* ‼️ INI TAMBAHANNYA ‼️ */
+/* Styling untuk Tombol Fullscreen */
+#fullscreen-btn {
+    background: none;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: bold;
+    font-size: 1.5vh; /* Ukuran pas */
+    margin-left: 20px;
+    border-radius: 5px;
+    padding: 5px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#fullscreen-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    border-color: #fff;
+}
