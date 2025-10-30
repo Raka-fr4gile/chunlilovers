@@ -1,0 +1,8 @@
+{
+  "name": "NFC Dashboard ABK",
+  "short_name": "NFC ABK",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#000"
+}
