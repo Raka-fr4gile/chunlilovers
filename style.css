@@ -9,17 +9,14 @@ html, body {
 }
 
 /* 1. "KANVAS" UTAMA
- * Ini yang jadi background hutan full-screen kamu
 */
 .page-wrapper {
     width: 100%;
     height: 100%;
     position: relative; /* Kunci agar 'position: absolute' di dalam berfungsi */
     
-    /* ‼️ INI URL BACKGROUNDHUTAN.PNG KAMU DARI NETLIFY */
+    /* ‼️ GANTI URL BACKGROUNDHUTAN.PNG KAMU DARI NETLIFY */
     background-image: url('https://chunlilvrsz.netlify.app/BackgroundHutan.png');
-    
-    /* Ini yang bikin FULL, nggak ada item-item (pillarbox) */
     background-size: cover; 
     background-position: center;
 }
@@ -32,12 +29,10 @@ html, body {
     left: 0;
     width: 100%; 
     height: 100%; 
-    /* Paksa stretch tapi jaga rasio (mungkin akan ter-crop, tapi itu intinya 'cover') */
     object-fit: cover; 
 }
 
 /* * === 3. PENGATURAN Z-INDEX (TUMPUKAN) ===
- * (Sekarang tanpa layer-1-bg)
 */
 .layer-2-kabut {
     z-index: 2;
@@ -52,7 +47,7 @@ html, body {
 .layer-4-pohon { z-index: 4; }
 .layer-5-semak-og { z-index: 5; }
 .layer-6-semak-bunga { z-index: 6; }
-.layer-8-hewan { z-index: 8; }
+/* ‼️ .layer-8-hewan DIHAPUS ‼️ */
 .layer-9-rumput { z-index: 9; }
 .layer-10-light-ganas {
     z-index: 10;
@@ -61,30 +56,25 @@ html, body {
 }
 
 /* 4. KOTAK KONTEN 4:3 (TRANSPARAN)
- * Ini adalah "area" 4:3 untuk GIF-mu
 */
 .content-box {
     position: absolute;
     z-index: 11; /* Paling depan */
-
-    /* Posisi & Ukuran (Bikin dia 70% lebar layar, di tengah) */
-    width: 70vw; /* 70% lebar viewport */
-    aspect-ratio: 4 / 3; /* Otomatis 4:3 */
     
-    /* Tengahkan di layar */
+    /* ‼️ PERUBAHAN: GIF digedein jadi 90% lebar layar ‼️ */
+    width: 90vw; /* 90% lebar viewport (biar ada gap dikit) */
+    aspect-ratio: 4 / 3; /* Otomatis 4:3 (cocok buat 400x300) */
+    
     left: 50%;
-    top: 45%; /* Agak ke tengah-atas */
+    top: 48%; /* Turunin dikit biar pas di tengah layar */
     transform: translate(-50%, -50%);
     
-    /* ‼️ PERUBAHAN UTAMA: GAUSAH PAKE KOTAK PUTIH */
     background: none;
     box-shadow: none;
-    
-    /* Tetap pakai flex untuk nengahin GIF di dalamnya */
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0; /* Gak perlu padding lagi */
+    padding: 0; 
 }
 
 /* 5. GAMBAR/GIF DI DALAM KOTAK
@@ -92,15 +82,12 @@ html, body {
 #nfc-image {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 12px; /* Opsional, biar GIF-nya agak rounded */
-    
-    /* ‼️ INI SHADOW-NYA (di GIF-nya, bukan di kotaknya) */
-    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+    /* Shadow dibikin lebih soft */
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
 }
 
 
 /* 6. FOOTER (Paling Atas)
- * Ini adalah teks status
 */
 .layer-11-footer {
     position: absolute;
@@ -109,8 +96,6 @@ html, body {
     width: 100%;
     z-index: 12; /* PALING ATAS */
     height: 10vh; /* 10% tinggi viewport */
-
-    /* Styling Teks */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -123,7 +108,6 @@ html, body {
 /* Indikator Status */
 #status-indicator {
     display: inline-block;
-    /* Bikin ukuran indikator responsif juga */
     width: 2.5vh;
     height: 2.5vh;
     border-radius: 50%;
@@ -135,4 +119,23 @@ html, body {
 
 #uid-text {
     font-family: "Courier New", Courier, monospace;
+}
+
+/* 7. ‼️ STYLE TOMBOL FULLSCREEN BARU ‼️
+*/
+.fullscreen-button-img {
+    position: absolute;
+    top: 20px; /* Jarak dari atas */
+    right: 20px; /* Jarak dari kanan */
+    width: 50px; /* Ukuran tombol (dikecilin dikit) */
+    height: 50px;
+    z-index: 20; /* Paling atas, di atas footer */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    opacity: 0.7; /* Bikin agak transparan biar gak norak */
+}
+
+.fullscreen-button-img:hover {
+    transform: scale(1.1);
+    opacity: 1;
 }
