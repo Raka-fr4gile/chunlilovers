@@ -6,7 +6,7 @@ let websocket;
 const statusIndicator = document.getElementById('status-indicator');
 const uidText = document.getElementById('uid-text');
 const nfcImage = document.getElementById('nfc-image');
-// ‼️ PERUBAHAN 1: Ambil elemen tombol baru ‼️
+// Tombol fullscreen (udah bener)
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 
 // Fungsi untuk memulai koneksi WebSocket
@@ -49,7 +49,7 @@ function onMessage(event) {
         if(data.uid === "NONE") {
             uidText.textContent = "Tempelkan kartu...";
         } else {
-            // Kita sembunyikan UID biar bersih
+            // Sembunyikan UID biar bersih
             // uidText.textContent = `UID: ${data.uid}`; 
         }
     }
@@ -60,7 +60,7 @@ function onMessage(event) {
     }
 }
 
-// ‼️ PERUBAHAN 2: Fungsi untuk trigger fullscreen ‼️
+// Fungsi untuk trigger fullscreen (udah bener)
 function goFullscreen() {
     console.log('Tombol fullscreen diklik');
     const elem = document.documentElement; // Minta fullscreen untuk seluruh halaman
@@ -74,8 +74,7 @@ function goFullscreen() {
     }
 }
 
-// ‼️ PERUBAHAN 3: Ubah event listener 'load' ‼️
-// Mulai koneksi & pasang listener saat halaman dimuat
+// Mulai koneksi & pasang listener saat halaman dimuat (udah bener)
 window.addEventListener('load', () => {
     initWebSocket(); // Tetap jalankan koneksi WebSocket
 
