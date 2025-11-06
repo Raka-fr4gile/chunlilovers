@@ -13,7 +13,7 @@ html, body {
 .page-wrapper {
     width: 100%;
     height: 100%;
-    position: relative; /* Kunci agar 'position: absolute' di dalam berfungsi */
+    position: relative; 
     
     /* ‼️ GANTI URL BACKGROUNDHUTAN.PNG KAMU DARI NETLIFY */
     background-image: url('https://chunlilvrsz.netlify.app/BackgroundHutan.png');
@@ -59,7 +59,7 @@ html, body {
 */
 .content-box {
     position: absolute;
-    z-index: 11; /* Paling depan */
+    z-index: 11; 
     
     /* ‼️ PERUBAHAN: GIF digedein jadi 90% lebar layar ‼️ */
     width: 90vw; /* 90% lebar viewport (biar ada gap dikit) */
@@ -121,18 +121,18 @@ html, body {
     font-family: "Courier New", Courier, monospace;
 }
 
-/* 7. ‼️ STYLE TOMBOL FULLSCREEN BARU ‼️
+/* 7. ‼️ STYLE TOMBOL FULLSCREEN ‼️
 */
 .fullscreen-button-img {
     position: absolute;
     top: 20px; /* Jarak dari atas */
     right: 20px; /* Jarak dari kanan */
-    width: 50px; /* Ukuran tombol (dikecilin dikit) */
+    width: 50px; /* Ukuran tombol */
     height: 50px;
     z-index: 20; /* Paling atas, di atas footer */
     cursor: pointer;
     transition: all 0.2s ease;
-    opacity: 0.7; /* Bikin agak transparan biar gak norak */
+    opacity: 0.7; 
 }
 
 .fullscreen-button-img:hover {
