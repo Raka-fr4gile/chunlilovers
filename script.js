@@ -1,5 +1,4 @@
 // Alamat WebSocket akan otomatis menggunakan IP dari ESP32
-// karena halaman index.html-nya dibuka dari sana.
 const gateway = `ws://${window.location.hostname}/ws`;
 let websocket;
 
@@ -7,6 +6,8 @@ let websocket;
 const statusIndicator = document.getElementById('status-indicator');
 const uidText = document.getElementById('uid-text');
 const nfcImage = document.getElementById('nfc-image');
+// ‼️ PERUBAHAN 1: Ambil elemen tombol baru ‼️
+const fullscreenBtn = document.getElementById('fullscreen-btn');
 
 // Fungsi untuk memulai koneksi WebSocket
 function initWebSocket() {
@@ -48,7 +49,8 @@ function onMessage(event) {
         if(data.uid === "NONE") {
             uidText.textContent = "Tempelkan kartu...";
         } else {
-            uidText.textContent = `UID: ${data.uid}`;
+            // Kita sembunyikan UID biar bersih
+            // uidText.textContent = `UID: ${data.uid}`; 
         }
     }
     
@@ -58,5 +60,29 @@ function onMessage(event) {
     }
 }
 
-// Mulai koneksi saat halaman dimuat
-window.addEventListener('load', initWebSocket);
+// ‼️ PERUBAHAN 2: Fungsi untuk trigger fullscreen ‼️
+function goFullscreen() {
+    console.log('Tombol fullscreen diklik');
+    const elem = document.documentElement; // Minta fullscreen untuk seluruh halaman
+
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari, Chrome di iOS */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+
+// ‼️ PERUBAHAN 3: Ubah event listener 'load' ‼️
+// Mulai koneksi & pasang listener saat halaman dimuat
+window.addEventListener('load', () => {
+    initWebSocket(); // Tetap jalankan koneksi WebSocket
+
+    // Pasang listener ke tombol fullscreen
+    if (fullscreenBtn) {
+        fullscreenBtn.addEventListener('click', goFullscreen);
+    } else {
+        console.error('Tombol Fullscreen tidak ditemukan');
+    }
+});
