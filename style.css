@@ -16,7 +16,7 @@ html, body {
     position: relative; 
     
     /* ‼️ GANTI URL BACKGROUNDHUTAN.PNG KAMU DARI NETLIFY */
-    background-image: url('https://chunlilvrsz.netlify.app/BackgroundHutan.png');
+    background-image: url('https://aac-project.netlify.app/BackgroundHutan.png');
     background-size: cover; 
     background-position: center;
 }
@@ -29,80 +29,79 @@ html, body {
     left: 0;
     width: 100%; 
     height: 100%; 
-    object-fit: cover; 
+    object-fit: cover;
+    pointer-events: none; /* Biar gak nge-blok klik */
 }
 
 /* * === 3. PENGATURAN Z-INDEX (TUMPUKAN) ===
 */
-.layer-2-kabut {
-    z-index: 2;
-    mix-blend-mode: screen; 
-    opacity: 0.6; 
-}
-.layer-3-light-kuning {
-    z-index: 3;
-    mix-blend-mode: overlay; 
-    opacity: 0.4;
-}
+.layer-2-kabut { z-index: 2; mix-blend-mode: screen; opacity: 0.6; }
+.layer-3-light-kuning { z-index: 3; mix-blend-mode: overlay; opacity: 0.4; }
 .layer-4-pohon { z-index: 4; }
 .layer-5-semak-og { z-index: 5; }
 .layer-6-semak-bunga { z-index: 6; }
 /* ‼️ .layer-8-hewan DIHAPUS ‼️ */
 .layer-9-rumput { z-index: 9; }
-.layer-10-light-ganas {
-    z-index: 10;
-    mix-blend-mode: multiply;
-    opacity: 0.3;
+.layer-10-light-ganas { z-index: 10; mix-blend-mode: multiply; opacity: 0.3; }
+
+/* ‼️ PERUBAHAN 1: Style Border.png ‼️ */
+.layer-border {
+    z-index: 11; /* Di depan semua hiasan, di belakang GIF */
+    object-fit: fill; /* Paksa border menuhin layar */
 }
+
 
 /* 4. KOTAK KONTEN 4:3 (TRANSPARAN)
 */
 .content-box {
     position: absolute;
-    z-index: 11; 
-    
-    /* ‼️ PERUBAHAN: GIF digedein jadi 90% lebar layar ‼️ */
-    width: 90vw; /* 90% lebar viewport (biar ada gap dikit) */
-    aspect-ratio: 4 / 3; /* Otomatis 4:3 (cocok buat 400x300) */
+    z-index: 12; /* Di depan border */
+
+    /* Ukuran dari kodemu (80vw x 85vh) udah oke */
+    width: 80vw;
+    height: 85vh; 
     
     left: 50%;
-    top: 48%; /* Turunin dikit biar pas di tengah layar */
+    top: 48%; 
     transform: translate(-50%, -50%);
     
     background: none;
     box-shadow: none;
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0; 
+    padding: 0;
 }
 
 /* 5. GAMBAR/GIF DI DALAM KOTAK
 */
 #nfc-image {
-    max-width: 100%;
-    max-height: 100%;
-    /* Shadow dibikin lebih soft */
-    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.5));
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* 'contain' biar gambar/gif utuh, gak kepotong */
+    border-radius: 12px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
 }
 
 
-/* 6. FOOTER (Paling Atas)
+/* 6. FOOTER (Teks Status)
 */
 .layer-11-footer {
     position: absolute;
     bottom: 0; 
     left: 0;
     width: 100%;
-    z-index: 12; /* PALING ATAS */
-    height: 10vh; /* 10% tinggi viewport */
+    z-index: 13; /* Di atas border & content-box */
+    height: 10vh; 
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3vh; /* Ukuran font responsif */
+    font-size: 3vh; 
     color: #ffffff;
     font-weight: 600;
     text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    pointer-events: none; 
 }
 
 /* Indikator Status */
@@ -121,21 +120,24 @@ html, body {
     font-family: "Courier New", Courier, monospace;
 }
 
-/* 7. ‼️ STYLE TOMBOL FULLSCREEN ‼️
-*/
-.fullscreen-button-img {
+/* ‼️ PERUBAHAN 2: Style Tombol Fullscreen ‼️ */
+/* Style untuk <img> dengan ID fullscreen-btn */
+#fullscreen-btn {
     position: absolute;
-    top: 20px; /* Jarak dari atas */
-    right: 20px; /* Jarak dari kanan */
-    width: 50px; /* Ukuran tombol */
+    z-index: 20; /* Paling atas, di atas segalanya */
+    top: 20px;
+    right: 20px;
+    
+    width: 50px; /* Ukuran tombol 50x50px */
     height: 50px;
-    z-index: 20; /* Paling atas, di atas footer */
+    
     cursor: pointer;
+    opacity: 0.7;
     transition: all 0.2s ease;
-    opacity: 0.7; 
+    border-radius: 50%; /* Bikin bulat */
 }
 
-.fullscreen-button-img:hover {
-    transform: scale(1.1);
+#fullscreen-btn:hover {
     opacity: 1;
+    transform: scale(1.1);
 }
