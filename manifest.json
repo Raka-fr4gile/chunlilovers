@@ -1,8 +1,22 @@
 {
-  "name": "NFC Dashboard ABK",
-  "short_name": "NFC ABK",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#000",
-  "theme_color": "#000"
+    "name": "NFC Dashboard ABK",
+    "short_name": "NFC ABK",
+    "description": "Dashboard Interaktif NFC untuk Anak Berkebutuhan Khusus",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f0f2f5",
+    "theme_color": "#f0f2f5",
+    "icons": [
+        {
+            "src": "https://raka-fr4gile.github.io/chunlilovers/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://raka-fr4gile.github.io/chunlilovers/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
 }
+
