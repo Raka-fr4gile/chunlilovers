@@ -16,7 +16,7 @@ html, body {
     position: relative; 
     
     /* ‼️ GANTI URL BACKGROUNDHUTAN.PNG KAMU DARI NETLIFY */
-    background-image: url('https://aac-project.netlify.app/BackgroundHutan.png');
+    background-image: url('https://raka-fr4gile.github.io/chunlilovers/BackgroundHutan.png');
     background-size: cover; 
     background-position: center;
 }
@@ -51,7 +51,7 @@ html, body {
 }
 
 
-/* 4. KOTAK KONTEN 4:3 (TRANSPARAN)
+/* 4. KOTAK KONTEN (TRANSPARAN)
 */
 .content-box {
     position: absolute;
