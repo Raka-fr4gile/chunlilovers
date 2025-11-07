@@ -7,8 +7,7 @@ const statusIndicator = document.getElementById('status-indicator');
 const uidText = document.getElementById('uid-text');
 const nfcImage = document.getElementById('nfc-image');
 
-// ‼️ AMBIL ELEMEN TOMBOL YANG ADA DI HTML ANDA
-// (Ini udah bener, dia bakal ngambil <img>)
+// AMBIL ELEMEN TOMBOL YANG ADA DI HTML ANDA
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 
 // --- Fungsi untuk memulai koneksi WebSocket ---
@@ -41,18 +40,20 @@ function onMessage(event) {
     console.log('Menerima data:', event.data);
     let data;
     try {
-        data = JSON.parse(event.data);
+        data = JSON.parse(event.data); // Kalo JSON di .ino rusak, ini GAGAL
     } catch (e) {
         console.error('Gagal parsing JSON:', e);
-        return;
+        return; // PENTING: Kalo JSON rusak, stop di sini
     }
 
+    // --- ‼️ FIX BUG TEKS ‼️ ---
+    // Logika ini yang benerin tulisan "Tempelkan kartu..."
     if (data.uid) {
         if(data.uid === "NONE") {
             uidText.textContent = "Tempelkan kartu...";
         } else {
-             // Sembunyikan UID biar bersih
-            uidText.textContent = ""; // Kosongin aja
+             // Kalo ada UID, KOSONGIN teksnya biar bersih
+            uidText.textContent = ""; 
         }
     }
     
@@ -62,8 +63,7 @@ function onMessage(event) {
     }
 }
 
-// ‼️ --- FUNGSI Logika Fullscreen ---
-// (Ini udah bener, gausah diubah)
+// --- FUNGSI Logika Fullscreen ---
 function toggleFullscreen() {
     const elem = document.documentElement; // Targetkan seluruh halaman
 
@@ -92,8 +92,7 @@ function toggleFullscreen() {
 window.addEventListener('load', () => {
     initWebSocket(); // Jalankan WebSocket
 
-    // ‼️ IKATKAN TOMBOL KE FUNGSI FULLSCREEN
-    // (Ini udah bener, gausah diubah)
+    // IKATKAN TOMBOL KE FUNGSI FULLSCREEN
     if (fullscreenBtn) {
         fullscreenBtn.addEventListener('click', toggleFullscreen);
     } else {
