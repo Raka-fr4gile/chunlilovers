@@ -6,10 +6,12 @@ let websocket;
 const statusIndicator = document.getElementById('status-indicator');
 const uidText = document.getElementById('uid-text');
 const nfcImage = document.getElementById('nfc-image');
-// Tombol fullscreen (udah bener)
+
+// ‼️ AMBIL ELEMEN TOMBOL YANG ADA DI HTML ANDA
+// (Ini udah bener, dia bakal ngambil <img>)
 const fullscreenBtn = document.getElementById('fullscreen-btn');
 
-// Fungsi untuk memulai koneksi WebSocket
+// --- Fungsi untuk memulai koneksi WebSocket ---
 function initWebSocket() {
     console.log('Mencoba membuka WebSocket...');
     websocket = new WebSocket(gateway);
@@ -34,7 +36,7 @@ function onClose(event) {
     setTimeout(initWebSocket, 2000);
 }
 
-// Dipanggil saat menerima data dari server (ESP32)
+// Dipanggil saat menerima data dari server 
 function onMessage(event) {
     console.log('Menerima data:', event.data);
     let data;
@@ -49,8 +51,8 @@ function onMessage(event) {
         if(data.uid === "NONE") {
             uidText.textContent = "Tempelkan kartu...";
         } else {
-            // Sembunyikan UID biar bersih
-            // uidText.textContent = `UID: ${data.uid}`; 
+             // Sembunyikan UID biar bersih
+            uidText.textContent = ""; // Kosongin aja
         }
     }
     
@@ -60,28 +62,41 @@ function onMessage(event) {
     }
 }
 
-// Fungsi untuk trigger fullscreen (udah bener)
-function goFullscreen() {
-    console.log('Tombol fullscreen diklik');
-    const elem = document.documentElement; // Minta fullscreen untuk seluruh halaman
+// ‼️ --- FUNGSI Logika Fullscreen ---
+// (Ini udah bener, gausah diubah)
+function toggleFullscreen() {
+    const elem = document.documentElement; // Targetkan seluruh halaman
 
-    if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari, Chrome di iOS */
-        elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
+    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        // Masuk Fullscreen
+        console.log('Masuk fullscreen...');
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen().catch(err => {
+                console.error(`Error saat request fullscreen: ${err.message}`);
+            });
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        }
+    } else {
+        // Keluar Fullscreen
+        console.log('Keluar fullscreen...');
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        }
     }
 }
 
-// Mulai koneksi & pasang listener saat halaman dimuat (udah bener)
+// --- Mulai koneksi saat halaman dimuat ---
 window.addEventListener('load', () => {
-    initWebSocket(); // Tetap jalankan koneksi WebSocket
+    initWebSocket(); // Jalankan WebSocket
 
-    // Pasang listener ke tombol fullscreen
+    // ‼️ IKATKAN TOMBOL KE FUNGSI FULLSCREEN
+    // (Ini udah bener, gausah diubah)
     if (fullscreenBtn) {
-        fullscreenBtn.addEventListener('click', goFullscreen);
+        fullscreenBtn.addEventListener('click', toggleFullscreen);
     } else {
-        console.error('Tombol Fullscreen tidak ditemukan');
+        console.error('Tombol fullscreen-btn tidak ditemukan!');
     }
 });
